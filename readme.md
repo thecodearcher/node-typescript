@@ -61,4 +61,4 @@ npm start
 
 #### Debug with VSCode
 
-Add these [contents](https://github.com/thecodearcher) to your `.vscode/launch.json` file
+Add these [contents](https://github.com/thecodearcher/node-typescript/blob/master/.vscode/launch.json) to your `.vscode/launch.json` file
