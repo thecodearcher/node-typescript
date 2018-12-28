@@ -43,7 +43,7 @@ npm run watch
 
 #### Run in *production* mode:
 
-Compiles the application and starts it in production production mode.
+Compiles the application and starts it in production mode.
 
 ```shell
 npm run compile

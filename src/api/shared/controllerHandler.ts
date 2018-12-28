@@ -1,4 +1,3 @@
-import { AppError } from "./../../utils/app-error";
 /**
  * Handles controller execution and responds to user (API Express version).
  * @param promise Controller Promise. I.e. ControllerInstance().getUser.
