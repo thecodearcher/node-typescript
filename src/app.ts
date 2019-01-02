@@ -1,10 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
-import path from "path";
 import { userRouter } from "./api/User";
-import { BASE_PATH, ENVIRONMENT, MONGODB_URI } from "./config";
-import { global } from "./middleware";
+import { BASE_PATH, MONGODB_URI } from "./config";
+import { errorHandler, global } from "./middleware";
 import { logger } from "./utils/logger";
+
 class App {
     public express = express();
     public basePath = BASE_PATH || "";
@@ -58,36 +58,7 @@ class App {
             process.exit();
         });
 
-        this.express.use((err, req, res, next) => {
-            if (!err.isOperational) {
-                if (ENVIRONMENT !== "development") {
-                    logger.error(
-                        "An unexpected error occurred please restart the application!",
-                        "\nError: " + err.message + " Stack: " + err.stack,
-                    );
-                    process.exit(1);
-                }
-            }
-            logger.error(
-                `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${
-                req.ip
-                } - Stack: ${err.stack}`,
-            );
-            err.stack = err.stack || "";
-            const errorDetails = {
-                status: false,
-                message: err.message,
-                statusCode: err.statusCode || 500,
-                data: err.data,
-                stack: err.stack,
-            };
-            if (ENVIRONMENT === "production") {
-                delete (errorDetails.stack);
-            }
-
-            res.status(err.statusCode || 500);
-            return res.json(errorDetails);
-        });
+        this.express.use(errorHandler);
 
     }
 }
