@@ -25,8 +25,11 @@ export const UsersModel = DB.define("users", {
 
 });
 
+const option: any = {
+    alter: true,
+};
 // force: true will drop the table if it already exists
-UsersModel.sync({ alter: true }).then(() => {
+UsersModel.sync(option).then(() => {
     logger.info("Users table migrated");
     // Table created
 });
