@@ -1,4 +1,4 @@
-import { SchemaMap } from "joi";
+import { SchemaMap } from "@hapi/joi";
 
 export interface IBaseInterface extends SchemaMap {
     id?: number;

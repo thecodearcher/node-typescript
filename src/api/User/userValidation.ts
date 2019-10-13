@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from "@hapi/joi";
 import { IUser } from "./IUser";
 
 export const UserValidationSchema = Joi.object().keys(<IUser> {

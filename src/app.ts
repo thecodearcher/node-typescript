@@ -13,7 +13,7 @@ class App {
     }
 
     private boot() {
-        this.initilizeDb();
+        this.initializeDb();
         this.registerMiddlewares();
         this.mountRoutes();
         this.handleUncaughtErrorEvents();
@@ -29,10 +29,10 @@ class App {
         global(this.express);
     }
 
-    private initilizeDb() {
+    private initializeDb() {
         DB.authenticate()
             .then(() => {
-                logger.info("Databse connection has been established successfully.");
+                logger.info("Database connection has been established successfully.");
             })
             .catch((err) => {
                 throw (err);
@@ -60,4 +60,5 @@ class App {
     }
 }
 
-export default new App().express;
+const app = new App().express;
+export default app;

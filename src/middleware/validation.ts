@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from "@hapi/joi";
 import _ from "lodash";
 import { validationHandler } from "./../shared/validationHandler";
 
@@ -10,14 +10,14 @@ import { validationHandler } from "./../shared/validationHandler";
  * @param {*} schema validationSchema for this route
  * @returns
  */
-export default (schema: Joi.ObjectSchema, options?: Joi.ValidationOptions) => {
+export const validation = (schema: Joi.ObjectSchema, options?: Joi.ValidationOptions) => {
 
     // enabled HTTP methods for request data validation
-    const _supportedMethods = ["post", "put"];
+    const _supportedMethods = ["post", "put", "patch"];
 
     // Joi validation options
     const _validationOptions = {
-        abortEarly: false, // abort after the last validation error
+        abortEarly: true, // abort after the first validation error
         allowUnknown: true, // allow unknown keys that will be ignored
         stripUnknown: true, // remove unknown keys from the validated data
         ...options,
@@ -39,6 +39,8 @@ export default (schema: Joi.ObjectSchema, options?: Joi.ValidationOptions) => {
                 next();
             }
 
+        } else {
+            next();
         }
     };
 };
